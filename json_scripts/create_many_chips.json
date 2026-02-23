@@ -1,0 +1,15 @@
+{
+  "type": "CreateManyChips",
+  "data": {
+    "create": {
+      "items": [
+        { "serialNumber": "chip_sn_01", "asicId": 8878 },
+        { "serialNumber": "chip_sn_02", "asicId": 8879 },
+        { "serialNumber": "chip_sn_03", "asicId": 8880 },
+        { "serialNumber": "chip_sn_04", "asicId": 8881 },
+        { "serialNumber": "chip_sn_05", "asicId": 8882 }
+      ],
+      "generalLocation": "LosAlamos"
+    }
+  }
+}

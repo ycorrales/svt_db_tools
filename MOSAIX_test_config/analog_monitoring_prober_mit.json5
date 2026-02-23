@@ -1,0 +1,58 @@
+{
+  // Analog monitoring configuration
+  // Contains settings for BOTH internal ADC and external DMM
+  // - Internal ADC is always available
+  // - External DMM can be configured or set to "none"
+
+  // Internal ADC configuration (optional - defaults used if not specified)
+  "internal_adc": {
+    // ADC channel selection: "ADC_A" or "ADC_B"
+    // Default: "ADC_A"
+    "channel": "ADC_A",
+
+    // ADC reference voltage: "BGR" (bandgap), "GSVDD" (supply + voltage divider)
+    // Default: "BGR"
+    "reference": "BGR",
+
+    // ADC sampling speed in kHz: 156, 312
+    // Default: 312
+    "speed_khz": 312,
+
+    // Monitoring resistor value in kΩ (for current measurements)
+    // Default: 300.0
+    "monitoring_resistor_kohms": 300.0,
+
+    // ADC conversion timeout in microseconds
+    // Default: 1000.0 us (1 ms = 100 polling attempts at 10us polling interval)
+    "conversion_timeout_us": 1000.0,
+
+    // Run self check: true
+    // Runs a self check at start-up
+    "self_check": true
+  },
+
+  // External DMM configuration
+  // Provide full configuration object as shown below, or "none" to disable
+  "external_dmm": {
+    // VISA resource name
+    // "USB0::1510::29968::04386076::0::INSTR" DMM7510
+    // "USB0::1510::25856::04655764::0::INSTR" DMM6500
+    "resource_name": "USB0::1510::29968::04387104::0::INSTR",
+
+    // DMM type: "DMM6500" or "DMM7510"
+    "type": "DMM7510",
+
+    // Number of power line cycles for integration (0.001 to 10.0)
+    // Default: 1.0
+    "nplc": 1.0,
+
+    // Voltage range in volts (0.1, 1.0, 10.0, 100.0)
+    // Only used if auto_range is false
+    // Default: 10.0
+    "range_v": 10.0,
+
+    // Enable auto-ranging, voltage range is then ignored
+    // Default: false
+    "auto_range": false
+  }
+}

@@ -1,0 +1,2 @@
+--COPY (SELECT * FROM main."WaferLocation") TO stdout DELIMITER ',' CSV HEADER;
+--COPY main.\"WaferLocation\" FROM stdin DELIMITER '\'','\'' CSV HEADER;"

@@ -1,0 +1,11 @@
+{
+  "type": "CreateEquipment",
+  "data": {
+    "create": {
+      "name": "DAQ-0009012C0D0F301D",
+      "equipmentTypeId": 1,
+      "generalLocation": "CERN",
+      "specification": "{}"
+    }
+  }
+}

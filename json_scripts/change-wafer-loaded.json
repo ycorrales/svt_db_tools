@@ -1,0 +1,7 @@
+{
+  "data": {
+    "wpMachineId": 1,
+    "loadedWaferId": null
+  },
+  "type": "UpdateWpMachineLoadedWafer"
+}

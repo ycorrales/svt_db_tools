@@ -1,0 +1,14 @@
+{
+  "data": {
+    "create": {
+      "waferTypeId": 2,
+      "serialNumber": "MPW1-02",
+      "batchNumber": 2,
+      "generalLocation": "LosAlamos",
+      "thinningDate": "2025-10-27",
+      "dicingDate": null,
+      "productionDate": "2025-10-27"
+    }
+  },
+  "type": "CreateWafer"
+}

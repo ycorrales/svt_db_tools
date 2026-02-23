@@ -1,0 +1,122 @@
+{
+    "boards": [
+        {
+            "number": 0,
+            "type": "enclustra",
+            "subtype": "mts",
+            "fw_hash": "0xf19709ca",
+            "usb": {
+                "serial_number": "DAQ-0009012C0D0F331D"
+            }
+        }
+    ],
+    // Optional configuration for the emulator
+    "emulator": {
+            "advanced_modelling": true,
+            "seu_counting_enable": true
+        },
+    "chips": [
+        {
+           "number": 0,
+            "board_number": 0,
+            "power_setup_number": 0,  // References power_setup.number (future: index into power_setup array)
+            "emulator": false,
+            // Name of the chip, used for logging and identification
+            "name": "MOSAIX_test",
+            // Path to custom configs folder, relative to CONFIG_DIR environment variable
+            "path_chip_config": "" // Path is resolved using resolvePath: absolute=as-is, './'=CWD, else relative to MOSAIX_TEST_ROOT
+        }
+    ],
+    // Power configuration using numbered profiles architecture
+    // Future: power_setup will change from object to array, allowing multiple power configurations
+    // Example future format: "power_setup": [{"number": 0, ...}, {"number": 1, ...}]
+    "power_setup": {
+        "number": 0,  // setupIdentifier for this power setup configuration (enables future array support)
+        "default_profile": "Emulated",  // Options: "Emulated", "rs_ps", "smu"
+        "enable_monitoring_thread": false, // Global setting for all profiles
+        "monitoring_frequency": 1.0, // Global setting for all profiles (Hz)
+        "link_fuses": true, // Global default - true for R&S power supplies, false for SMUs
+        "power_spec": "Configs/PowerSpecs/mosaix_standard_spec.json5", // Global power specification for all, can be overridden by CLI or environment variables in the future
+
+        "profiles": {
+
+            "Emulated": {
+                "type": "Emulated",
+                "description": "Emulated power supplies for development/testing without hardware"
+            },
+
+            "rs_ps": {
+                "type": "Real",
+                "description": "RS HMP4040 power supplies (MIT prober configuration)",
+                "instruments": [
+                    {
+                        "number": 1,
+                        "type": "RS_HMP4040",
+                        "address": "USB0::2733::279::121563::0::INSTR",
+                       "channel_mapping": {
+                            "1": "PSUB",
+                            "2": "GSVDD",
+                            "3": "GAVDD",
+                            "4": "GDVDD"
+                        }
+                    },
+                    {
+                        "number": 2,
+                        "type": "RS_HMP4040",
+                        "address": "USB0::2733::279::107194::0::INSTR",
+                        "channel_mapping": {
+                            "1": "TXVDD"
+                        }
+                    }
+                ]
+            },
+            "smu": {
+                "type": "Real",
+                "description": "Keysight SMUs for precision measurements",
+                "link_fuses": false,  // Override global - SMUs don't support fuse linking
+                "instruments": [
+                    {
+                        "number": 1,
+                        "type": "KS_B2901B",
+                        "address": "USB0::10893::44801::MY61390481::0::INSTR",
+                        "channel_mapping": {
+                            "1": "PSUB"
+                        }
+                    },
+                    {
+                        "number": 2,
+                        "type": "KS_B2902A",
+                        "address": "USB0::2391::52760::MY51145309::0::INSTR",
+                        "channel_mapping": {
+                            "1": "GSVDD",
+                            "2": "GAVDD"
+                        }
+                    },
+                    {
+                        "number": 3,
+                        "type": "KS_B2902B",
+                        "address": "USB0::10893::37377::MY63320617::0::INSTR",
+                        "channel_mapping": {
+                            "1": "GDVDD",
+                            "2": "TXVDD"
+                        }
+                    }
+                ]
+            }
+        }
+    },
+    "impedance_measurement_instruments": {
+        "smu": {
+            "address": "USB0::10893::44801::MY61390481::0::INSTR",
+            "type": "KS_B2901B",
+            "channel": 1
+        },
+        "daq": {
+            "address": "USB0::10893::20737::MY58021808::0::INSTR",
+            "type": "KS_DAQ970A"
+        }
+    },
+    "analog_monitoring": { // Path to analog monitoring config, contains both internal ADC and external DMM settings
+        "path_am_config": "Configs/AnalogMonitoringConfigs/analog_monitoring_prober_mit.json5"
+    }
+}

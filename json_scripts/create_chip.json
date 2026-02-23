@@ -1,0 +1,10 @@
+{
+  "type": "CreateChip",
+  "data": {
+    "create": {
+      "serialNumber": "chip_sn_01",
+      "asicId": 8878,
+      "generalLocation": "LosAlamos"
+    }
+  }
+}

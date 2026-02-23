@@ -1,0 +1,15 @@
+{
+    "type": "ImpedanceMeasurement",         // Test type, must be "ImpedanceMeasurement"
+    "name": "Common",         // Test name, used for logging and result identification
+    "generic_name": "ImpedanceTest",
+    "subtype": "",
+    "power_down_on_exit": true,
+    "success_required": false,
+    "parameters": {
+        "measurement_type": "common",      // Testing mode: "initial", "common" or "float"
+        "current_limit": 0.001,             // A - current limit during the measurement
+        "start_voltage": -0.05,             // V (Measurement range start: -50 mV)
+        "end_voltage": 0.05,                // V (Measurement range end: +50 mV)
+        "step_voltage": 0.005               // V (Measurement step: 5 mV)
+     }
+}
