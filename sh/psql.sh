@@ -2,7 +2,7 @@
 (
   set -euo pipefail
 
-  db_name='svt_sw_db_test'
+  db_name=
   db_schema='main'
   HOST='dbod-svt-sw-pgdb'
 
@@ -25,48 +25,51 @@
   }
 
   _createdb() {
-    local DB_NAME=${1:-}
-    [ -z "$DB_NAME" ] && {
+    [ -z "$db_name" ] && {
       echo "ERROR: no DB name provided."
       exit 1
     }
-    local cmd="SELECT 1 FROM pg_database WHERE datname='${DB_NAME}';"
+    local cmd="SELECT 1 FROM pg_database WHERE datname='${db_name}';"
     if [[ "$(_psql_exec -XtAc \""$cmd"\")" == "1" ]]; then
-      echo "DB ${DB_NAME} exits, exiting."
+      echo "DB ${db_name} exits, exiting."
       exit 1
     else
-      cmd="CREATE DATABASE ${DB_NAME};"
+      cmd="CREATE DATABASE ${db_name};"
       _psql_exec -c \""${cmd}"\"
     fi
   }
 
   _dropdb() {
-    local DB_NAME=${1:-}
-    [ -z "$DB_NAME" ] && {
+    [ -z "$db_name" ] && {
       echo "ERROR: no DB name provided."
       exit 1
     }
-    local cmd="SELECT 1 FROM pg_database WHERE datname='${DB_NAME}';"
+    local cmd="SELECT 1 FROM pg_database WHERE datname='${db_name}';"
     if [[ "$(_psql_exec -XtAc \""$cmd"\")" != "1" ]]; then
-      echo "DB ${DB_NAME} does not exits, exiting."
+      echo "DB ${db_name} does not exits, exiting."
       exit 1
     else
-      cmd="DROP DATABASE ${DB_NAME};"
+      cmd="DROP DATABASE ${db_name};"
       _psql_exec -c \""${cmd}"\"
     fi
   }
 
+  _dumpdb() {
+    echo "Dumping database $db_name"
+    pg_dump${PSQL_CMD_SUFFIX:+${PSQL_CMD_SUFFIX}} -h $HOST -p 6600 -d "$db_name" -U admin -s -F p -E UTF-8 -f "$db_name"-schema.sql
+    pg_dump${PSQL_CMD_SUFFIX:+${PSQL_CMD_SUFFIX}} -h $HOST -p 6600 -d "$db_name" -U admin -a -F p -E UTF-8 -f "$db_name"-data.sql
+  }
+
   _renamedb() {
-    local oldDBNAME=${1:-}
-    local newDBNAME=${2:-}
-    if [ -z "$oldDBNAME" ] || [ -z "$newDBNAME" ]; then
-      echo "usage --rename <old-db-name> <new-db-name>"
+    local newDBNAME=${1:-}
+    if [ -z "$db_name" ] || [ -z "$newDBNAME" ]; then
+      echo "usage --db <old-db-name> --rename <new-db-name>"
       exit 1
     fi
 
-    echo "Renaming db $oldDBNAME to $newDBNAME"
+    echo "Renaming db $db_name to $newDBNAME"
     sql_file=$(mktemp -u rename.sql)
-    sed -e "s/%oldDBNAME%/$oldDBNAME/g" -e "s/%newDBNAME%/$newDBNAME/g" "$thisScriptPath"/../sql_script/SVT-database-rename.sql >"$sql_file"
+    sed -e "s/%oldDBNAME%/$db_name/g" -e "s/%newDBNAME%/$newDBNAME/g" "$thisScriptPath"/../sql_script/SVT-database-rename.sql >"$sql_file"
     _psql_exec '-a -f' "$sql_file"
     test -f "$sql_file" && rm "$sql_file"
   }
@@ -131,20 +134,22 @@
       shift
       ;;
     --createdb)
-      _createdb "${2:-}"
+      _createdb
       shift 2
       ;;
     --dropdb)
-      _dropdb "${2:-}"
-      shift 2
+      _dropdb
+      shift
       ;;
     --renamedb)
-      oldName=${2:-}
-      newName=${3:-}
-      [[ -n "$oldName" ]] && shift
+      newName=${2:-}
       [[ -n "$newName" ]] && shift
       shift
-      _renamedb "$oldName" "$newName"
+      _renamedb "$newName"
+      ;;
+    --dumpdb)
+      _dumpdb
+      shift 2
       ;;
     --exec)
       _exec '-c' "${2:-}"
@@ -155,6 +160,7 @@
       shift 2
       ;;
     --open)
+      db_name=${db_name:-'svt_sw_db_test'}
       _psql_exec "-d ${db_name}"
       shift
       ;;

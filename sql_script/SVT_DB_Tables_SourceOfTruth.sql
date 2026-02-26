@@ -298,7 +298,7 @@ CREATE TABLE "main"."WaferProbeMachine" (
   "swVersion" varchar(50) NOT NULL,
   "vendor" main."wpVendor" NOT NULL,
   "loadedWaferId" integer DEFAULT null,
-  "loaderWaferOrientation" main."waferMapOrientation" DEFAULT null,
+  "loadedWaferOrientation" main."waferMapOrientation" DEFAULT null,
   "installedProbeCardId" integer DEFAULT null,
   "installedProbeCardOrientation" main."waferMapOrientation" DEFAULT null
 );
