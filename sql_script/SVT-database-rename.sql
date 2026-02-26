@@ -5,11 +5,11 @@
 SELECT pg_terminate_backend( pid )
 FROM pg_stat_activity
 WHERE pid <> pg_backend_pid( )
-    AND datname = 'svt_test';
+    AND datname = '%oldDBNAME%';
 
 -- it should now have zero client
 -- clone the database
 -- CREATE DATABASE "svt_sw_db" WITH TEMPLATE "svt_sw_db_test" OWNER "admin";
 
 -- rename the database
-ALTER DATABASE "svt_test" RENAME TO "svt_sw_db_test";
+ALTER DATABASE "%oldDBNAME%" RENAME TO "%newDBNAME%";
