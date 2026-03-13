@@ -1,0 +1,15 @@
+{
+  "type": "ImpedanceMeasurement",
+  "name": "Float",
+  "generic_name": "ImpedanceTest",
+  "subtype": "",
+  "power_down_on_exit": true,
+  "success_required": false,
+  "parameters": {
+    "measurement_type": "float",
+    "current_limit": 0.001,
+    "start_voltage": -0.05,
+    "end_voltage": 0.05,
+    "step_voltage": 0.005
+  }
+}

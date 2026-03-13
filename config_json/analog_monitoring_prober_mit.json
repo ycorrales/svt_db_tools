@@ -1,0 +1,17 @@
+{
+  "internal_adc": {
+    "channel": "ADC_A",
+    "reference": "BGR",
+    "speed_khz": 312,
+    "monitoring_resistor_kohms": 300,
+    "conversion_timeout_us": 1000,
+    "self_check": true
+  },
+  "external_dmm": {
+    "resource_name": "USB0::1510::29968::04387104::0::INSTR",
+    "type": "DMM7510",
+    "nplc": 1,
+    "range_v": 10,
+    "auto_range": false
+  }
+}

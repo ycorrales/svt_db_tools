@@ -1,0 +1,113 @@
+{
+  "boards": [
+    {
+      "number": 0,
+      "type": "enclustra",
+      "subtype": "mts",
+      "fw_hash": "0xf19709ca",
+      "usb": {
+        "serial_number": "DAQ-0009012C0D0F331D"
+      }
+    }
+  ],
+  "emulator": {
+    "advanced_modelling": true,
+    "seu_counting_enable": true
+  },
+  "chips": [
+    {
+      "number": 0,
+      "board_number": 0,
+      "power_setup_number": 0,
+      "emulator": false,
+      "name": "MOSAIX_test",
+      "path_chip_config": ""
+    }
+  ],
+  "power_setup": {
+    "number": 0,
+    "default_profile": "Emulated",
+    "enable_monitoring_thread": false,
+    "monitoring_frequency": 1,
+    "link_fuses": true,
+    "power_spec": "Configs/PowerSpecs/mosaix_standard_spec.json5",
+    "profiles": {
+      "Emulated": {
+        "type": "Emulated",
+        "description": "Emulated power supplies for development/testing without hardware"
+      },
+      "rs_ps": {
+        "type": "Real",
+        "description": "RS HMP4040 power supplies (MIT prober configuration)",
+        "instruments": [
+          {
+            "number": 1,
+            "type": "RS_HMP4040",
+            "address": "USB0::2733::279::121563::0::INSTR",
+            "channel_mapping": {
+              "1": "PSUB",
+              "2": "GSVDD",
+              "3": "GAVDD",
+              "4": "GDVDD"
+            }
+          },
+          {
+            "number": 2,
+            "type": "RS_HMP4040",
+            "address": "USB0::2733::279::107194::0::INSTR",
+            "channel_mapping": {
+              "1": "TXVDD"
+            }
+          }
+        ]
+      },
+      "smu": {
+        "type": "Real",
+        "description": "Keysight SMUs for precision measurements",
+        "link_fuses": false,
+        "instruments": [
+          {
+            "number": 1,
+            "type": "KS_B2901B",
+            "address": "USB0::10893::44801::MY61390481::0::INSTR",
+            "channel_mapping": {
+              "1": "PSUB"
+            }
+          },
+          {
+            "number": 2,
+            "type": "KS_B2902A",
+            "address": "USB0::2391::52760::MY51145309::0::INSTR",
+            "channel_mapping": {
+              "1": "GSVDD",
+              "2": "GAVDD"
+            }
+          },
+          {
+            "number": 3,
+            "type": "KS_B2902B",
+            "address": "USB0::10893::37377::MY63320617::0::INSTR",
+            "channel_mapping": {
+              "1": "GDVDD",
+              "2": "TXVDD"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "impedance_measurement_instruments": {
+    "smu": {
+      "address": "USB0::10893::44801::MY61390481::0::INSTR",
+      "type": "KS_B2901B",
+      "channel": 1
+    },
+    "daq": {
+      "address": "USB0::10893::20737::MY58021808::0::INSTR",
+      "type": "KS_DAQ970A"
+    }
+  },
+  "analog_monitoring": {
+    "path_am_config": "Configs/AnalogMonitoringConfigs/analog_monitoring_prober_mit.json5"
+  }
+}
