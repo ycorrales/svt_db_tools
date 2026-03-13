@@ -398,7 +398,7 @@ CREATE TABLE "main"."SvtTestTemplate" (
   "asicFamilyType" main."asicFamilyType" NOT NULL,
   "testTypeId" integer NOT NULL,
   "testTypeConfigId" integer,
-  "enable" bool DEFAULT true
+  "isEnabled" bool DEFAULT true
 );
 
 ALTER TABLE "main"."WaferTypeMap" ADD FOREIGN KEY ("waferTypeId") REFERENCES "main"."WaferType" ("id") DEFERRABLE INITIALLY IMMEDIATE;
