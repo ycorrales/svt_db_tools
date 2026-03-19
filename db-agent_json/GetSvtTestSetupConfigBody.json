@@ -1,0 +1,20 @@
+[
+  {
+    "type": "GetSvtTestSetupConfigBody",
+    "data": {
+      "setupConfigId": 1
+    }
+  },
+  {
+    "type": "GetSvtTestSetupConfigBody",
+    "data": {
+      "setupConfigId": 2
+    }
+  },
+  {
+    "type": "GetSvtTestSetupConfigBody",
+    "data": {
+      "setupConfigId": 3
+    }
+  }
+]

@@ -375,8 +375,12 @@ CREATE TABLE "main"."SvtTestSetupConfig" (
   "setupId" integer NOT NULL,
   "name" varchar(100) NOT NULL,
   "note" text,
-  "configBody" JSON NOT NULL,
   "createdAt" date DEFAULT (CURRENT_DATE)
+);
+
+CREATE TABLE "main"."SvtTestSetupConfigBody" (
+  "setupConfigId" integer UNIQUE,
+  "configBody" JSON NOT NULL
 );
 
 CREATE TABLE "main"."SvtTestType" (
@@ -452,6 +456,8 @@ ALTER TABLE "main"."SvtTestSetupEquipList" ADD FOREIGN KEY ("setupId") REFERENCE
 ALTER TABLE "main"."SvtTestSetupEquipList" ADD FOREIGN KEY ("equipId") REFERENCES "main"."Equipment" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "main"."SvtTestSetupConfig" ADD FOREIGN KEY ("setupId") REFERENCES "main"."SvtTestSetup" ("id") DEFERRABLE INITIALLY IMMEDIATE;
+
+ALTER TABLE "main"."SvtTestSetupConfigBody" ADD FOREIGN KEY ("setupConfigId") REFERENCES "main"."SvtTestSetupConfig" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 
 ALTER TABLE "main"."SvtTestTypeAsicFamilyTypeList" ADD FOREIGN KEY ("testTypeId") REFERENCES "main"."SvtTestType" ("id") DEFERRABLE INITIALLY IMMEDIATE;
 

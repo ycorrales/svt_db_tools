@@ -1,0 +1,29 @@
+[
+  {
+    "data": {
+      "id": 1,
+      "update": {
+        "defaultConfigId": 1
+      }
+    },
+    "type": "UpdateSvtTestSetup"
+  },
+  {
+    "data": {
+      "id": 2,
+      "update": {
+        "defaultConfigId": 2
+      }
+    },
+    "type": "UpdateSvtTestSetup"
+  },
+  {
+    "data": {
+      "id": 3,
+      "update": {
+        "defaultConfigId": 3
+      }
+    },
+    "type": "UpdateSvtTestSetup"
+  }
+]

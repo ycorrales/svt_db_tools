@@ -1,0 +1,330 @@
+[
+  {
+    "type": "CreateSvtTestSetupConfig",
+    "data": {
+      "create": {
+        "setupId": 1,
+        "name": "ts_mit_config_v0 ",
+        "note": "default config",
+        "configBody": {
+          "boards": [
+            {
+              "number": 0,
+              "type": "enclustra",
+              "subtype": "mts",
+              "fw_hash": "0xf19709ca",
+              "usb": {
+                "serial_number": "DAQ-0009012C0D0F331D"
+              }
+            }
+          ],
+          "emulator": {
+            "advanced_modelling": true,
+            "seu_counting_enable": true
+          },
+          "chips": [
+            {
+              "number": 0,
+              "board_number": 0,
+              "power_setup_number": 0,
+              "emulator": false,
+              "name": "MOSAIX_test",
+              "path_chip_config": ""
+            }
+          ],
+          "power_setup": {
+            "number": 0,
+            "default_profile": "Emulated",
+            "enable_monitoring_thread": false,
+            "monitoring_frequency": 1,
+            "link_fuses": true,
+            "power_spec": "Configs/PowerSpecs/mosaix_standard_spec.json5",
+            "profiles": {
+              "Emulated": {
+                "type": "Emulated",
+                "description": "Emulated power supplies for development/testing without hardware"
+              },
+              "rs_ps": {
+                "type": "Real",
+                "description": "RS HMP4040 power supplies (MIT prober configuration)",
+                "instruments": [
+                  {
+                    "number": 1,
+                    "type": "RS_HMP4040",
+                    "address": "USB0::2733::279::121563::0::INSTR",
+                    "channel_mapping": {
+                      "1": "PSUB",
+                      "2": "GSVDD",
+                      "3": "GAVDD",
+                      "4": "GDVDD"
+                    }
+                  },
+                  {
+                    "number": 2,
+                    "type": "RS_HMP4040",
+                    "address": "USB0::2733::279::107194::0::INSTR",
+                    "channel_mapping": {
+                      "1": "TXVDD"
+                    }
+                  }
+                ]
+              },
+              "smu": {
+                "type": "Real",
+                "description": "Keysight SMUs for precision measurements",
+                "link_fuses": false,
+                "instruments": [
+                  {
+                    "number": 1,
+                    "type": "KS_B2901B",
+                    "address": "USB0::10893::44801::MY61390481::0::INSTR",
+                    "channel_mapping": {
+                      "1": "PSUB"
+                    }
+                  },
+                  {
+                    "number": 2,
+                    "type": "KS_B2902A",
+                    "address": "USB0::2391::52760::MY51145309::0::INSTR",
+                    "channel_mapping": {
+                      "1": "GSVDD",
+                      "2": "GAVDD"
+                    }
+                  },
+                  {
+                    "number": 3,
+                    "type": "KS_B2902B",
+                    "address": "USB0::10893::37377::MY63320617::0::INSTR",
+                    "channel_mapping": {
+                      "1": "GDVDD",
+                      "2": "TXVDD"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "impedance_measurement_instruments": {
+            "smu": {
+              "address": "USB0::10893::44801::MY61390481::0::INSTR",
+              "type": "KS_B2901B",
+              "channel": 1
+            },
+            "daq": {
+              "address": "USB0::10893::20737::MY58021808::0::INSTR",
+              "type": "KS_DAQ970A"
+            }
+          },
+          "analog_monitoring": {
+            "path_am_config": "Configs/AnalogMonitoringConfigs/analog_monitoring_prober_mit.json5"
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "CreateSvtTestSetupConfig",
+    "data": {
+      "create": {
+        "setupId": 2,
+        "name": "analog_monitor_config_v0",
+        "note": "default config",
+        "configBody": {
+          "internal_adc": {
+            "channel": "ADC_A",
+            "reference": "BGR",
+            "speed_khz": 312,
+            "monitoring_resistor_kohms": 300,
+            "conversion_timeout_us": 1000,
+            "self_check": true
+          },
+          "external_dmm": {
+            "resource_name": "USB0::1510::29968::04387104::0::INSTR",
+            "type": "DMM7510",
+            "nplc": 1,
+            "range_v": 10,
+            "auto_range": false
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "CreateSvtTestSetupConfig",
+    "data": {
+      "create": {
+        "setupId": 3,
+        "name": "sldo_ts_brunel_config_v0",
+        "note": "default config",
+        "configBody": {
+          "boards": {
+            "controlBoard": {
+              "boardNumber": 0,
+              "type": "control_board",
+              "connections": {
+                "network": {
+                  "interface": "ethernet",
+                  "host": "192.168.1.101",
+                  "port": 10001,
+                  "connector": "SK1"
+                },
+                "carrier_board": {
+                  "type": "ribbon_cable",
+                  "connectors": ["SK2", "SK3"],
+                  "description": "Connect control board and carrier board using supplied ribbon cables"
+                }
+              },
+              "power": {
+                "power_rails": {
+                  "PL1": {
+                    "max_voltage_v": 12.0,
+                    "description": "Supply to run the relays"
+                  },
+                  "PL3": {
+                    "max_voltage_v": 5.0,
+                    "description": "Supply to run the microcontroller and ancillary components"
+                  },
+                  "PL9": {
+                    "max_voltage_v": 1.6,
+                    "description": "Direct power to the SLDO (V_IN)"
+                  }
+                }
+              },
+              "timing": {
+                "rx_window_sec": 0.4,
+                "loop_interval_sec": 10.0
+              }
+            },
+            "carrierBoard": {
+              "boardNumber": 1,
+              "type": "carrier_board",
+              "connections": {
+                "control_board": {
+                  "type": "ribbon_cable",
+                  "connectors": ["SK1", "SK2"],
+                  "description": "Connect control board and carrier board using supplied ribbon cables"
+                },
+                "measurement": {
+                  "SK3": {
+                    "type": "SMA",
+                    "reads": "V_out",
+                    "instrument": "oscilloscope",
+                    "description": "Voltage output of SLDO"
+                  },
+                  "SK4": {
+                    "type": "SMA",
+                    "reads": "V_in",
+                    "instrument": "DMM",
+                    "description": "Voltage input to SLDO"
+                  }
+                },
+                "heater": {
+                  "type": "screw_terminal_block",
+                  "description": "Connect power to resistive heater on board"
+                }
+              }
+            }
+          },
+          "powerSupplies": [
+            {
+              "number": 0,
+              "name": "HP E3631A",
+              "type": "power_supply",
+              "control": "software",
+              "interface": "RS232",
+              "address": "ASRL/dev/cu.usbserial-FT0BMMZ0::INSTR",
+              "timeout_ms": 5000,
+              "max_safe_current_a": 1.7,
+              "operatingChannels": {
+                "P6V": "true",
+                "P25V": "true",
+                "N25V": "false"
+              },
+              "channel_limits": {
+                "P6V": 6.0,
+                "P25V": 25.0,
+                "N25V": -25.0
+              }
+            },
+            {
+              "number": 1,
+              "name": "TTI EX1810R",
+              "type": "power_supply",
+              "control": "manual",
+              "interface": "",
+              "address": ""
+            }
+          ],
+          "measurement_instruments": {
+            "DMM": {
+              "name": "Agilent 34410A",
+              "type": "digital_multimeter",
+              "control": "software",
+              "interface": "ethernet",
+              "host": "192.168.1.102",
+              "port": 5025,
+              "poll_sec": 0.25,
+              "nplc": 10.0,
+              "autorange": "true",
+              "timeout_s": 5.0,
+              "measurement_connection": {
+                "signal": "V_in",
+                "board_connector": "SK4"
+              }
+            },
+            "oscilloscope": {
+              "name": "LeCroy WaveRunner 6050A",
+              "type": "oscilloscope",
+              "control": "manual",
+              "interface": "",
+              "address": "",
+              "measurement_connection": {
+                "signal": "V_out",
+                "board_connector": "SK3"
+              }
+            }
+          },
+          "testbench_connections": [
+            {
+              "type": "network",
+              "endpoints": ["PC.ETHERNET", "CARRBOARD0.SK1"]
+            },
+            {
+              "type": "power",
+              "endpoints": ["HP_E3631A.P6V", "CONTBOARD0.PL3"]
+            },
+            {
+              "type": "power",
+              "endpoints": ["HP_E3631A.P25V", "CONTBOARD0.PL1"]
+            },
+            {
+              "type": "power",
+              "endpoints": ["TTI_EX1810R.OUT", "CONTBOARD0.PL9"]
+            },
+            {
+              "type": "ribbon",
+              "endpoints": ["CONTBOARD0.SK2", "CARRBOARD0.SK2"]
+            },
+            {
+              "type": "ribbon",
+              "endpoints": ["CONTBOARD0.SK3", "CARRBOARD0.SK1"]
+            },
+            {
+              "type": "measurement",
+              "signal": "V_out",
+              "endpoints": ["CARRBOARD0.SK3", "LeCroy_WaveRunner6050A.CH1"]
+            },
+            {
+              "type": "measurement",
+              "signal": "V_in",
+              "endpoints": ["CARRBOARD0.SK4", "Agilent_34410A.VINPUT"]
+            }
+          ],
+          "logging": {
+            "log_dir": "logs"
+          }
+        }
+      }
+    }
+  }
+]
