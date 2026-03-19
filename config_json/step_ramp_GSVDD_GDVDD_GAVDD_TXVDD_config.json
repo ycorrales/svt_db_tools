@@ -17,54 +17,14 @@
   "PSUB": 0,
   "PSUB_current": 0.01,
   "parameters": {
-    "intermediate_voltage_steps_GSVDD": [
-      0.1,
-      0.8,
-      1.1,
-      1.22
-    ],
-    "intermediate_current_limits_GSVDD": [
-      0.01,
-      0.05,
-      0.08,
-      0.08
-    ],
-    "intermediate_voltage_steps_GAVDD": [
-      0.1,
-      0.8,
-      1.08,
-      1.2
-    ],
-    "intermediate_current_limits_GAVDD": [
-      0.01,
-      0.01,
-      0.01,
-      0.01
-    ],
-    "intermediate_voltage_steps_GDVDD": [
-      0.1,
-      0.8,
-      1.08,
-      1.2
-    ],
-    "intermediate_current_limits_GDVDD": [
-      0.02,
-      0.25,
-      0.25,
-      0.25
-    ],
-    "intermediate_voltage_steps_TXVDD": [
-      0.1,
-      1,
-      1.7,
-      1.8
-    ],
-    "intermediate_current_limits_TXVDD": [
-      0.01,
-      0.01,
-      0.01,
-      0.01
-    ],
+    "intermediate_voltage_steps_GSVDD": [0.1, 0.8, 1.1, 1.22],
+    "intermediate_current_limits_GSVDD": [0.01, 0.05, 0.08, 0.08],
+    "intermediate_voltage_steps_GAVDD": [0.1, 0.8, 1.08, 1.2],
+    "intermediate_current_limits_GAVDD": [0.01, 0.01, 0.01, 0.01],
+    "intermediate_voltage_steps_GDVDD": [0.1, 0.8, 1.08, 1.2],
+    "intermediate_current_limits_GDVDD": [0.02, 0.25, 0.25, 0.25],
+    "intermediate_voltage_steps_TXVDD": [0.1, 1, 1.7, 1.8],
+    "intermediate_current_limits_TXVDD": [0.01, 0.01, 0.01, 0.01],
     "measurements_per_step": 5,
     "time_between_measurements": 100,
     "suspend_monitoring_thread": true,
@@ -72,3 +32,4 @@
     "ramp_psub_at_end": true
   }
 }
+

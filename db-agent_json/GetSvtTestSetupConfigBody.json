@@ -2,19 +2,19 @@
   {
     "type": "GetSvtTestSetupConfigBody",
     "data": {
-      "setupConfigId": 1
+      "id": 1
     }
   },
   {
     "type": "GetSvtTestSetupConfigBody",
     "data": {
-      "setupConfigId": 2
+      "id": 2
     }
   },
   {
     "type": "GetSvtTestSetupConfigBody",
     "data": {
-      "setupConfigId": 3
+      "id": 3
     }
   }
 ]
