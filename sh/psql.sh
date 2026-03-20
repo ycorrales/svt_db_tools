@@ -143,7 +143,7 @@
       ;;
     --createdb)
       _createdb
-      shift 2
+      shift
       ;;
     --dropdb)
       _dropdb
