@@ -1,0 +1,8 @@
+[
+  {
+    "type": "GetSvtTestTypeConfigBody",
+    "data": {
+      "id": 1
+    }
+  }
+]

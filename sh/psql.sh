@@ -60,6 +60,14 @@
     pg_dump${PSQL_CMD_SUFFIX:+${PSQL_CMD_SUFFIX}} -h $HOST -p 6600 -d "$db_name" -U admin -a -F p -E UTF-8 -f "$db_name"-data.sql
   }
 
+  _restartSeq() {
+    if [ $# -ne 3 ]; then
+      echo "ERROR: 3 arguments required, but $# provided"
+      exit 1
+    fi
+    _exec -c "SELECT pg_catalog.setval('\''main.\"$1_id_seq\"'\'', $2, $3)"
+  }
+
   _renamedb() {
     local newDBNAME=${1:-}
     if [ -z "$db_name" ] || [ -z "$newDBNAME" ]; then
@@ -68,8 +76,8 @@
     fi
 
     echo "Renaming db $db_name to $newDBNAME"
-    sql_file=$(mktemp -u rename.sql)
-    sed -e "s/%oldDBNAME%/$db_name/g" -e "s/%newDBNAME%/$newDBNAME/g" "$thisScriptPath"/../sql_script/SVT-database-rename.sql >"$sql_file"
+    sql_file=$(mktemp -u /tmp/rename.sql)
+    sed -e "s/%oldDBNAME%/$db_name/g" -e "s/%newDBNAME%/$newDBNAME/g" "$thisScriptPath"/Db-rename-template.sql >"$sql_file"
     _psql_exec '-a -f' "$sql_file"
     test -f "$sql_file" && rm "$sql_file"
   }
@@ -99,7 +107,7 @@
   }
 
   [ $# -eq 0 ] && {
-    echo "ERROR at least a argumentis needed"
+    echo "ERROR at least a arguments needed"
     exit 1
   }
 
@@ -150,6 +158,11 @@
     --dumpdb)
       _dumpdb
       shift 2
+      ;;
+    --restartSeq)
+      shift
+      _restartSeq "$@"
+      shift $#
       ;;
     --exec)
       _exec '-c' "${2:-}"
