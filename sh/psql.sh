@@ -65,7 +65,15 @@
       echo "ERROR: 3 arguments required, but $# provided"
       exit 1
     fi
-    _exec -c "SELECT pg_catalog.setval('\''main.\"$1_id_seq\"'\'', $2, $3)"
+    _exec -c "SELECT pg_catalog.setval('\''main.\"$1_id_seq\"'\'', $2, $3);"
+  }
+
+  _getLastValue() {
+    if [ $# -ne 1 ]; then
+      echo "ERROR: 1 arguments required, but $# provided"
+      exit 1
+    fi
+    _exec -c "SELECT  last_value FROM main.\"$1_id_seq\";"
   }
 
   _renamedb() {
@@ -162,6 +170,11 @@
     --restartSeq)
       shift
       _restartSeq "$@"
+      shift $#
+      ;;
+    --getLastValue)
+      shift
+      _getLastValue "$@"
       shift $#
       ;;
     --exec)
