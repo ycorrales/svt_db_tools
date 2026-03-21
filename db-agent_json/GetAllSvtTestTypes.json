@@ -7,8 +7,22 @@
   },
   {
     "data": {
+      "filter": { "ids": [2] }
+    },
+    "type": "GetAllSvtTestTypes"
+  },
+  {
+    "data": {
       "filter": {
         "asicFamilyType": "AncMPW1"
+      }
+    },
+    "type": "GetAllSvtTestTypes"
+  },
+  {
+    "data": {
+      "filter": {
+        "asicFamilyType": "MOSAIX"
       }
     },
     "type": "GetAllSvtTestTypes"
