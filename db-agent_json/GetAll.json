@@ -1,0 +1,14 @@
+[
+  {
+    "data": {
+      "filter": {
+        "waferId": 1
+      },
+      "pager": {
+        "limit": 10000,
+        "offset": 0
+      }
+    },
+    "type": "GetAllAsics"
+  }
+]

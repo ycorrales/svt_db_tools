@@ -1,0 +1,15 @@
+{
+  "testName": "DACScan",
+  "mode": 1,
+  "dacPreSet": 0,
+  "loadType": "capacitive",
+  "rheostatConnected": false,
+  "outputType": "bulk",
+  "parameters": {
+    "loadVal": "10nF",
+    "temparature(C)": "27",
+    "currentLimit(A)": "1.5",
+    "targetVoltage(V)": "1.6"
+  },
+  "monitorBoardTemperature": false
+}

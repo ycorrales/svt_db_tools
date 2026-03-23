@@ -1,0 +1,17 @@
+{
+  "testName": "Psrr",
+  "mode": 1,
+  "dacPreSet": 0,
+  "loadType": "resistive",
+  "rheostatConnected": false,
+  "outputType": "single",
+  "parameters": {
+    "loadVal": "900mA",
+    "temparature(C)": "27",
+    "currentLimit(A)": "1.5",
+    "targetVoltage(V)": "1.6",
+    "signalAmplitude(mV)": "1",
+    "signalFrequency(kHz)": 10
+  },
+  "monitorBoardTemperature": false
+}

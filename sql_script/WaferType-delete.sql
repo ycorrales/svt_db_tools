@@ -1,8 +1,3 @@
--- update main."SvtTestSetup"
--- set
--- "defaultConfigId" = NULL
--- where
--- "id" = 3;
 delete from main."WaferTypeMap"
 where "waferTypeId" > 3
 ;

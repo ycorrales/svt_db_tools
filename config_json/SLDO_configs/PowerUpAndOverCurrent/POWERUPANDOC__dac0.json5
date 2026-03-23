@@ -1,0 +1,16 @@
+{
+  "testName": "PowerUpAndOverCurrent",
+  "mode": 0,
+  "dacPreSet": 0,
+  "loadType": "oc",
+  "rheostatConnected": false,
+  "monitorBoardTemperature": false,
+  "outputType": "bulk",
+  "parameters": {
+    "ramprate(kV/s)": 3.1,
+    "temparature(C)": 27,
+    "currentLimit(A)": 1.65,
+    "startVoltage(V)": 0.0,
+    "endVoltage(V)": 1.6
+  }
+}

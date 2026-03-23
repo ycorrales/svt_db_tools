@@ -1,0 +1,17 @@
+{
+  "testName": "RampRate",
+  "mode": 1,
+  "dacPreSet": 31,
+  "loadType": "capacitive",
+  "rheostatConnected": false,
+  "outputType": "single",
+  "parameters": {
+    "loadVal": "10nF",
+    "ramprate(kV/s)": 2.6,
+    "temparature(C)": "27",
+    "currentLimit(A)": "1.5",
+    "startVoltage(V)": "0",
+    "endVoltage(V)": "1.60"
+  },
+  "monitorBoardTemperature": false
+}

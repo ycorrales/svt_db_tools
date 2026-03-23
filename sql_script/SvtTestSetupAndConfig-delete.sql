@@ -1,8 +1,6 @@
-update main."SvtTestSetup"
-set
-  "defaultConfigId" = NULL
-where
-  "id" > 0;
+delete from main."SvtTestSetupDefaultConfig"
+where "setupId" > 0
+;
 
 delete from main."SvtTestSetupConfig"
 where "id" > 0
@@ -12,6 +10,7 @@ select pg_catalog.setval('main."SvtTestSetupConfig_id_seq"', 1, false)
 ;
 
 delete from main."SvtTestSetupEquipList"
+where "setupId" > 0
 ;
 
 delete from main."SvtTestSetup"

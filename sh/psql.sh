@@ -30,6 +30,7 @@
       exit 1
     }
     local cmd="SELECT 1 FROM pg_database WHERE datname='${db_name}';"
+    echo "Creating databse ${db_name}"
     if [[ "$(_psql_exec -XtAc \""$cmd"\")" == "1" ]]; then
       echo "DB ${db_name} exits, exiting."
       exit 1
@@ -45,6 +46,7 @@
       exit 1
     }
     local cmd="SELECT 1 FROM pg_database WHERE datname='${db_name}';"
+    echo "Droping databse ${db_name}"
     if [[ "$(_psql_exec -XtAc \""$cmd"\")" != "1" ]]; then
       echo "DB ${db_name} does not exits, exiting."
       exit 1
@@ -165,7 +167,7 @@
       ;;
     --dumpdb)
       _dumpdb
-      shift 2
+      shift $#
       ;;
     --restartSeq)
       shift

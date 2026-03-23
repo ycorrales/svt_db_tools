@@ -1,0 +1,17 @@
+{
+  "testName": "Irradiation",
+  "mode": 1,
+  "dacPreSet": 0,
+  "loadType": "capacitive",
+  "rheostatConnected": false,
+  "outputType": "single",
+  "parameters": {
+    "loadVal": "100nF",
+    "ramprate(kV/s)": "3.1",
+    "temparature(C)": "27",
+    "currentLimit(A)": "1.5",
+    "targetVoltage(V)": "1.6",
+    "radiationLevel(Gy)": "xx"
+  },
+  "monitorBoardTemperature": false
+}
