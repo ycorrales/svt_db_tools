@@ -1,0 +1,32 @@
+[
+  {
+    "type": "CreateSvtTestTemplate",
+    "data": {
+      "create": {
+        "testTypeConfigId": 1,
+        "asicFamilyType": "MOSAIX",
+        "isEnabled": true
+      }
+    }
+  },
+  {
+    "type": "CreateSvtTestTemplate",
+    "data": {
+      "create": {
+        "testTypeConfigId": 2,
+        "asicFamilyType": "MOSAIX",
+        "isEnabled": true
+      }
+    }
+  },
+  {
+    "type": "CreateSvtTestTemplate",
+    "data": {
+      "create": {
+        "testTypeConfigId": 3,
+        "asicFamilyType": "MOSAIX",
+        "isEnabled": true
+      }
+    }
+  }
+]
