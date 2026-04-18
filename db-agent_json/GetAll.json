@@ -2,6 +2,22 @@
   {
     "data": {
       "filter": {
+        "ids": [2, 3]
+      }
+    },
+    "type": "GetAllWaferTypes"
+  },
+  {
+    "data": {
+      "filter": {
+        "ids": [1]
+      }
+    },
+    "type": "GetAllWafers"
+  },
+  {
+    "data": {
+      "filter": {
         "waferId": 1
       },
       "pager": {
